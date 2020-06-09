@@ -18,6 +18,8 @@
 #define BACKGROUND_LIGHTWHITE BACKGROUND_WHITE | BACKGROUND_INTENSITY
 #define BACKGROUND_GREY BACKGROUND_BLACK | BACKGROUND_INTENSITY
 
+
+
 struct CONSOLE_COLOR
 {
     unsigned char red;
@@ -41,7 +43,7 @@ struct CONSOLE_COLOR
     { 97, 214, 214, BACKGROUND_LIGHTCYAN },
     { 249, 241, 165, BACKGROUND_LIGHTYELLOW },
     { 242, 242, 242, BACKGROUND_LIGHTWHITE },
-    { 118, 118, 118, BACKGROUND_GREY }
+ //   { 118, 118, 118, BACKGROUND_GREY }
 };
 
 int colorDifference(unsigned char red, unsigned char green, unsigned char blue, CONSOLE_COLOR cc)
@@ -73,22 +75,40 @@ WORD closestColor(unsigned char red, unsigned char green, unsigned char blue)
 
 int main(int argc, char** argv)
 {
+    int DESIRED_WIDTH = 200;
+    int DESIRED_HEIGHT = 200;
     int width, height, channels;
     unsigned char* data;
     char* imagePath;
 
     if(argc > 1)
     {
+        if(argc > 3)
+        {
+            DESIRED_WIDTH = std::atoi(argv[2]);
+            DESIRED_HEIGHT = std::atoi(argv[3]);
+        }
         imagePath = argv[1];
         data = stbi_load(imagePath, &width, &height, &channels, 3);
 
         if(data != NULL)
         {
             int count = 0;
+            int widthSkip = std::ceil((double)(width - DESIRED_WIDTH) / (double)DESIRED_WIDTH);
+            int heightSkip = std::ceil((double)(height - DESIRED_HEIGHT) / (double)DESIRED_HEIGHT);
 
-            for(int h = 0; h < height; h += 3)
+            if(widthSkip < 0)
             {
-                for(int w = 0; w < width; w += 3)
+                widthSkip = 0;
+            }
+            if(heightSkip < 0)
+            {
+                heightSkip = 0;
+            }
+
+            for(int h = 0; h < height; h++)
+            {
+                for(int w = 0; w < width; w++)
                 {
                     unsigned char red, green, blue;
 
@@ -96,14 +116,24 @@ int main(int argc, char** argv)
                     green = data[count++];
                     blue = data[count++];
 
-                    count += 6;
+                    if((w + widthSkip) >= width)
+                    {
+                        int remainingWidth = width - (w + 1);
+                        w = width;
+                        count += (3 * remainingWidth);
+                    }
+                    else
+                    {
+                        w += widthSkip;
+                        count += (3 * widthSkip);
+                    }
 
                     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), closestColor(red, green, blue));
                     std::cout << " ";
                 }
 
-                count += (width * 3) * 2;
-
+                h += heightSkip;
+                count += (width * 3) * heightSkip;
                 std::cout << std::endl;
             }
         }
