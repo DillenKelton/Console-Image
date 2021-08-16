@@ -23,10 +23,8 @@ int main(int argc, char** argv)
             if(desiredWidth == 0 || desiredHeight == 0)
             {
                 printf("Invalid desired width or desired height arguments.\n%s\n", ERROR_MSG);
+                return 1;
             }
-
-            return 1;
-            
         case 2:
             imagePath = argv[1];
             break;
