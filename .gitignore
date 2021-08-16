@@ -1,0 +1,6 @@
+# Visual Studio Code Files
+.vscode/*
+
+# Object/Executable Files
+*.o
+*.exe
