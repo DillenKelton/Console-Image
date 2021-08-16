@@ -1,5 +1,5 @@
 # Console-Image
-Displays an image within a console window
+Displays an image within a console window  
 Currently only works on Windows - A Linux-compatible version is planned
 
 ### COMPILATION:
@@ -8,6 +8,6 @@ MinGW-W64 is a fork of the MinGW project and can be found at [this](http://mingw
 To compile, just run make with the provided makefile
 
 ### USAGE:
-Use the following format: ConsoleImage.exe [image-name].[extension] [desired-width] [desired-height]
-Example: ConsoleImage.exe myImage.jpg 100 100
+Use the following format: ConsoleImage.exe [image-name].[extension] [desired-width] [desired-height]  
+Example: ConsoleImage.exe myImage.jpg 100 100  
 If width and height are not specified, a default value will be used.
