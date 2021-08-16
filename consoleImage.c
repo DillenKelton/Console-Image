@@ -1,5 +1,6 @@
-#include <iostream>
+#include <stdio.h>
 #include <cstdlib>
+#include <math.h>
 #include "windows.h"
 #include "consoleColor.h"
 #define STB_IMAGE_IMPLEMENTATION
@@ -17,23 +18,22 @@ int main(int argc, char** argv)
     switch(argc)
     {
         case 4:
-            try
+            desiredWidth = atoi(argv[2]);
+            desiredHeight = atoi(argv[3]);
+
+            if(desiredWidth == 0 || desiredHeight == 0)
             {
-                desiredWidth = std::stoi(argv[2]);
-                desiredHeight = std::stoi(argv[3]);
+                printf("Invalid desired width or desired height arguments.\n%s\n", ERROR_MSG);
             }
-            catch(...)
-            {
-                std::cerr << "Invalid desired width or desired height arguments.\n" << ERROR_MSG << std::endl;
-                return 1;
-            }
+
+            return 1;
             
         case 2:
             imagePath = argv[1];
             break;
 
         default:
-            std::cerr << "Invalid number of arguments.\n" << ERROR_MSG << std::endl;
+            printf("Invalid number of arguments.\n%s\n", ERROR_MSG);
             return 1;
     }
 
@@ -42,8 +42,8 @@ int main(int argc, char** argv)
     if(data != NULL)
     {
         int count = 0;
-        int widthSkip = std::ceil((double)(width - desiredWidth) / (double)desiredWidth);
-        int heightSkip = std::ceil((double)(height - desiredHeight) / (double)desiredHeight);
+        int widthSkip = ceil((double)(width - desiredWidth) / (double)desiredWidth);
+        int heightSkip = ceil((double)(height - desiredHeight) / (double)desiredHeight);
 
         if(widthSkip < 0)
         {
@@ -77,17 +77,17 @@ int main(int argc, char** argv)
                 }
 
                 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), closestColor(red, green, blue));
-                std::cout << " ";
+                printf(" ");
             }
 
             h += heightSkip;
             count += (width * 3) * heightSkip;
-            std::cout << std::endl;
+            printf("\n");
         }
     }
     else
     {
-        std::cout << "ERROR: File could not be read" << std::endl;
+        printf("ERROR: File could not be read\n");
     }
 
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN); //set console to default state
