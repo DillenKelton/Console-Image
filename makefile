@@ -1,8 +1,8 @@
 make: consoleImage.o consoleColor.o
-	g++ -o ConsoleImage consoleImage.o consoleColor.o
+	gcc -o ConsoleImage consoleImage.o consoleColor.o
 
-consoleImage.o: consoleImage.cpp consoleColor.h
-	g++ -c consoleImage.cpp
+consoleImage.o: consoleImage.c consoleColor.h
+	gcc -c consoleImage.c
 
-consoleColor.o: consoleColor.cpp consoleColor.h
-	g++ -c consoleColor.cpp
+consoleColor.o: consoleColor.c consoleColor.h
+	gcc -c consoleColor.c

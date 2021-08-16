@@ -40,6 +40,6 @@ struct CONSOLE_COLOR
 //    { 118, 118, 118, BACKGROUND_GREY }
 };
 
-int colorDifference(unsigned char red, unsigned char green, unsigned char blue, CONSOLE_COLOR cc);
+int colorDifference(unsigned char red, unsigned char green, unsigned char blue, struct CONSOLE_COLOR cc);
 
 WORD closestColor(unsigned char red, unsigned char green, unsigned char blue);
