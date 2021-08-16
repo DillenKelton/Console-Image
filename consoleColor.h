@@ -1,5 +1,8 @@
 #include "windows.h"
 
+#ifndef CONSOLE_COLOR_H
+#define CONSOLE_COLOR_H
+
 #define BACKGROUND_PURPLE BACKGROUND_BLUE | BACKGROUND_RED
 #define BACKGROUND_CYAN BACKGROUND_BLUE | BACKGROUND_GREEN
 #define BACKGROUND_YELLOW BACKGROUND_RED | BACKGROUND_GREEN
@@ -43,3 +46,5 @@ struct CONSOLE_COLOR
 int colorDifference(unsigned char red, unsigned char green, unsigned char blue, struct CONSOLE_COLOR cc);
 
 WORD closestColor(unsigned char red, unsigned char green, unsigned char blue);
+
+#endif
