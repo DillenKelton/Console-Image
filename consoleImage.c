@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <cstdlib>
 #include <math.h>
 #include "windows.h"
 #include "consoleColor.h"
