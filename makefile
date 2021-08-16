@@ -6,3 +6,7 @@ consoleImage.o: consoleImage.c consoleColor.h
 
 consoleColor.o: consoleColor.c consoleColor.h
 	gcc -c consoleColor.c
+
+clean:
+	del *.o
+	del *.exe
