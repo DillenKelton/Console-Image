@@ -1,6 +1,6 @@
 # Console-Image
 Displays an image within a console window  
-Currently only works on Windows - A Linux-compatible version is planned
+Currently only works on Windows
 
 ### COMPILATION:
 Compiled with gcc version 8.1.0 (x86_64-win32-seh-rev0, Built by MinGW-W64 project)  
